@@ -1,0 +1,12 @@
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\portFolio.exe
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\appsettings.Development.json
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\appsettings.json
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\portFolio.dll
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\portFolio.deps.json
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\portFolio.runtimeconfig.json
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\portFolio.pdb
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\Microsoft.AspNetCore.OpenApi.dll
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\Microsoft.OpenApi.dll
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Release\net10.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
