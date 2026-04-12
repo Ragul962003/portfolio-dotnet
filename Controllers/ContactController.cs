@@ -17,33 +17,27 @@ namespace portFolio.Controllers
         {
             try
             {
+                var emailUser = Environment.GetEnvironmentVariable("EMAIL_USER");
+                var emailPass = Environment.GetEnvironmentVariable("EMAIL_PASS");
+
                 var mail = new MailMessage
                 {
-                    From = new MailAddress("ragulvincent09@gmail.com"),
-                    Subject = "New Portfolio Message",
-                    Body =
-                        $"Name: {contact.Name}\n" +
-                        $"Email: {contact.Email}\n" +
-                        $"Message: {contact.Message}"
+                    From = new MailAddress(emailUser),
+                    Subject = "Portfolio Contact Message",
+                    Body = $"Name: {contact.Name}\nEmail: {contact.Email}\nMessage: {contact.Message}"
                 };
 
-                mail.To.Add("ragulvincent09@gmail.com");
+                mail.To.Add(emailUser);
 
                 var smtp = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential(
-         Environment.GetEnvironmentVariable("EMAIL_USER"),
-         Environment.GetEnvironmentVariable("EMAIL_PASS")
-     ),
+                    Credentials = new NetworkCredential(emailUser, emailPass),
                     EnableSsl = true
                 };
 
                 await smtp.SendMailAsync(mail);
 
-                return Ok(new
-                {
-                    message = "Message sent successfully"
-                });
+                return Ok("Message sent successfully");
             }
             catch (Exception ex)
             {
