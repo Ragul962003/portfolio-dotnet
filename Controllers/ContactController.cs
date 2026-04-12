@@ -13,7 +13,6 @@ namespace portFolio.Controllers
         private static List<contact> contacts = new List<contact>();
 
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] contact contact)
         {
             try
