@@ -18,10 +18,9 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();   // ⭐ ADD THIS LINE
+app.UseStaticFiles(); 
 
 app.UseCors("AllowAll");
 
