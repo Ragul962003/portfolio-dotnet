@@ -17,26 +17,29 @@ namespace portFolio.Controllers
         {
             try
             {
-                var mail = new MailMessage();
-                mail.From = new MailAddress($"{contact.Email}");
-                mail.To.Add("ragulvincent09@gmail.com");
+               
+                    return Ok(contact);
+               
+                //    var mail = new MailMessage();
+                //    mail.From = new MailAddress($"{contact.Email}");
+                //    mail.To.Add("ragulvincent09@gmail.com");
 
-                mail.Subject = $"{contact.Message}";
+                //    mail.Subject = $"{contact.Message}";
 
-                mail.Body = $"Name: {contact.Name}\n" +
-                            $"Email: {contact.Email}\n" +
-                            $"Message: {contact.Message}";
+                //    mail.Body = $"Name: {contact.Name}\n" +
+                //                $"Email: {contact.Email}\n" +
+                //                $"Message: {contact.Message}";
 
-                var smtp = new SmtpClient("smtp.gmail.com", 587);
-                smtp.Credentials = new NetworkCredential("ragulvincent09@gmail.com", "tjpm prpi nwum pzwz");
-                smtp.EnableSsl = true;
+                //    var smtp = new SmtpClient("smtp.gmail.com", 587);
+                //    smtp.Credentials = new NetworkCredential("ragulvincent09@gmail.com", "tjpm prpi nwum pzwz");
+                //    smtp.EnableSsl = true;
 
-                smtp.Send(mail);
+                //    smtp.Send(mail);
 
-                return Ok(new
-                {
-                    message = "Thank You, " + contact.Name + ", Your Message Sent Successfully"
-                });
+                //    return Ok(new
+                //    {
+                //        message = "Thank You, " + contact.Name + ", Your Message Sent Successfully"
+                //    });
             }
             catch (Exception ex)
             {
