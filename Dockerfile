@@ -1,12 +1,16 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
+
 COPY . .
-RUN dotnet restore
-RUN dotnet publish ./portFolio/portFolio.csproj -c Release -o out
+
+RUN dotnet restore portFolio.csproj
+RUN dotnet publish portFolio.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
+
 COPY --from=build /app/out .
 
 EXPOSE 10000
-ENTRYPOINT ["dotnet","portFolio.dll"]
+
+ENTRYPOINT ["dotnet", "portFolio.dll"]
