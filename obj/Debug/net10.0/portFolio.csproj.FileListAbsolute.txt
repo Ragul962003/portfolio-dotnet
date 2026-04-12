@@ -65,10 +65,11 @@ R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\staticwebassets.b
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\staticwebassets.development.json
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\swae.build.ex.cache
-R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\portFolio.csproj.Up2Date
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\portFolio.dll
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\refint\portFolio.dll
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\portFolio.pdb
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\portFolio.genruntimeconfig.cache
 R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\ref\portFolio.dll
+R:\Websites\my_PortFolio\portFolio\portFolio\bin\Debug\net10.0\dotnet-tools.json
+R:\Websites\my_PortFolio\portFolio\portFolio\obj\Debug\net10.0\portFolio.sourcelink.json
