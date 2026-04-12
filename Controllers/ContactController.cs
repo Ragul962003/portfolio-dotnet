@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PortfolioApi.Models;
 using System.Net;
 using System.Net.Mail;
@@ -10,8 +9,6 @@ namespace portFolio.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        private static List<contact> contacts = new List<contact>();
-
         [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] contact contact)
         {
@@ -20,19 +17,26 @@ namespace portFolio.Controllers
                 var emailUser = Environment.GetEnvironmentVariable("EMAIL_USER");
                 var emailPass = Environment.GetEnvironmentVariable("EMAIL_PASS");
 
-                var mail = new MailMessage
+                if (string.IsNullOrEmpty(emailUser) || string.IsNullOrEmpty(emailPass))
                 {
-                    From = new MailAddress(emailUser),
-                    Subject = "Portfolio Contact Message",
-                    Body = $"Name: {contact.Name}\nEmail: {contact.Email}\nMessage: {contact.Message}"
-                };
+                    return BadRequest("Email environment variables not configured.");
+                }
 
+                var mail = new MailMessage();
+                mail.From = new MailAddress(emailUser);
                 mail.To.Add(emailUser);
+                mail.Subject = "Portfolio Contact Message";
+
+                mail.Body =
+                    $"Name: {contact.Name}\n" +
+                    $"Email: {contact.Email}\n" +
+                    $"Message: {contact.Message}";
 
                 var smtp = new SmtpClient("smtp.gmail.com", 587)
                 {
                     Credentials = new NetworkCredential(emailUser, emailPass),
-                    EnableSsl = true
+                    EnableSsl = true,
+                    Timeout = 20000
                 };
 
                 await smtp.SendMailAsync(mail);
