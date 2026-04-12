@@ -13,36 +13,41 @@ namespace portFolio.Controllers
         private static List<contact> contacts = new List<contact>();
 
         [HttpPost]
-        public IActionResult SendMessage([FromBody] contact contact)
+        public async Task<IActionResult> SendMessage([FromBody] contact contact)
         {
             try
             {
-
                 var mail = new MailMessage();
-                mail.From = new MailAddress($"{contact.Email}");
+
+                mail.From = new MailAddress("ragulvincent09@gmail.com");
                 mail.To.Add("ragulvincent09@gmail.com");
 
-                mail.Subject = $"{contact.Message}";
+                mail.Subject = "New Contact Message From Portfolio";
 
                 mail.Body = $"Name: {contact.Name}\n" +
                             $"Email: {contact.Email}\n" +
                             $"Message: {contact.Message}";
 
-                var smtp = new SmtpClient("smtp.gmail.com", 587);
-                smtp.Credentials = new NetworkCredential("ragulvincent09@gmail.com", "tjpm prpi nwum pzwz");
-                smtp.EnableSsl = true;
+                var smtp = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential(
+                        "ragulvincent09@gmail.com",
+                        "tjpm prpi nwum pzwz"
+                    ),
+                    EnableSsl = true
+                };
 
-                smtp.Send(mail);
+                await smtp.SendMailAsync(mail);
 
                 return Ok(new
                 {
-                    message = "Thank You, " + contact.Name + ", Your Message Sent Successfully"
+                    message = "Thank you " + contact.Name + ", your message has been sent."
                 });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-    }
+        }
     }
 }
