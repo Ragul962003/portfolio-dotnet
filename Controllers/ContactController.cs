@@ -13,27 +13,29 @@ namespace portFolio.Controllers
         private static List<contact> contacts = new List<contact>();
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] contact contact)
         {
             try
             {
-                var mail = new MailMessage();
+                var mail = new MailMessage
+                {
+                    From = new MailAddress("ragulvincent09@gmail.com"),
+                    Subject = "New Portfolio Message",
+                    Body =
+                        $"Name: {contact.Name}\n" +
+                        $"Email: {contact.Email}\n" +
+                        $"Message: {contact.Message}"
+                };
 
-                mail.From = new MailAddress("ragulvincent09@gmail.com");
                 mail.To.Add("ragulvincent09@gmail.com");
-
-                mail.Subject = "New Contact Message From Portfolio";
-
-                mail.Body = $"Name: {contact.Name}\n" +
-                            $"Email: {contact.Email}\n" +
-                            $"Message: {contact.Message}";
 
                 var smtp = new SmtpClient("smtp.gmail.com", 587)
                 {
                     Credentials = new NetworkCredential(
-                        "ragulvincent09@gmail.com",
-                        "tjpm prpi nwum pzwz"
-                    ),
+         Environment.GetEnvironmentVariable("EMAIL_USER"),
+         Environment.GetEnvironmentVariable("EMAIL_PASS")
+     ),
                     EnableSsl = true
                 };
 
@@ -41,12 +43,12 @@ namespace portFolio.Controllers
 
                 return Ok(new
                 {
-                    message = "Thank you " + contact.Name + ", your message has been sent."
+                    message = "Message sent successfully"
                 });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest($"Email sending failed: {ex.Message}");
             }
         }
     }
