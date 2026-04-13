@@ -19,33 +19,32 @@ namespace portFolio.Controllers
 
                 if (string.IsNullOrEmpty(emailUser) || string.IsNullOrEmpty(emailPass))
                 {
-                    return BadRequest("Email environment variables not configured.");
+                    return StatusCode(500, "Email configuration missing.");
                 }
 
-                var mail = new MailMessage();
-                mail.From = new MailAddress(emailUser);
-                mail.To.Add(emailUser);
-                mail.Subject = "Portfolio Contact Message";
-
-                mail.Body =
-                    $"Name: {contact.Name}\n" +
-                    $"Email: {contact.Email}\n" +
-                    $"Message: {contact.Message}";
-
-                var smtp = new SmtpClient("smtp.gmail.com", 587)
+                var mail = new MailMessage
                 {
+                    From = new MailAddress(emailUser),
+                    Subject = "Portfolio Contact Message",
+                    Body = $"Name: {contact.Name}\nEmail: {contact.Email}\nMessage: {contact.Message}"
+                };
+
+                mail.To.Add(emailUser);
+
+                var smtp = new SmtpClient("smtp.gmail.com", 465)
+                {
+                    UseDefaultCredentials = false,
                     Credentials = new NetworkCredential(emailUser, emailPass),
-                    EnableSsl = true,
-                    Timeout = 20000
+                    EnableSsl = true
                 };
 
                 await smtp.SendMailAsync(mail);
 
-                return Ok("Message sent successfully");
+                return Ok(new { message = "Message sent successfully" });
             }
             catch (Exception ex)
             {
-                return BadRequest($"Email sending failed: {ex.Message}");
+                return StatusCode(500, ex.ToString());
             }
         }
     }
