@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PortfolioApi.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System.Net;
 using System.Net.Mail;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace portFolio.Controllers
 {
@@ -9,42 +13,46 @@ namespace portFolio.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        [HttpPost]
+
+[HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] contact contact)
         {
             try
             {
-                var emailUser = Environment.GetEnvironmentVariable("EMAIL_USER");
-                var emailPass = Environment.GetEnvironmentVariable("EMAIL_PASS");
+                var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
 
-                if (string.IsNullOrEmpty(emailUser) || string.IsNullOrEmpty(emailPass))
+                if (string.IsNullOrEmpty(apiKey))
                 {
-                    return StatusCode(500, "Email configuration missing.");
+                    return StatusCode(500, "SendGrid API key not configured.");
                 }
 
-                var mail = new MailMessage
+                var client = new SendGridClient(apiKey);
+
+                var from = new EmailAddress("ragulvincent09@gmail.com", "Portfolio Contact");
+                var to = new EmailAddress("ragulvincent09@gmail.com");
+
+                var subject = "New Portfolio Contact Message";
+
+                var plainTextContent =
+                    $"Name: {contact.Name}\n" +
+                    $"Email: {contact.Email}\n" +
+                    $"Message: {contact.Message}";
+
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, null);
+
+                var response = await client.SendEmailAsync(msg);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Accepted ||
+                    response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    From = new MailAddress(emailUser),
-                    Subject = "Portfolio Contact Message",
-                    Body = $"Name: {contact.Name}\nEmail: {contact.Email}\nMessage: {contact.Message}"
-                };
+                    return Ok("Message sent successfully");
+                }
 
-                mail.To.Add(emailUser);
-
-                var smtp = new SmtpClient("smtp.gmail.com", 465)
-                {
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(emailUser, emailPass),
-                    EnableSsl = true
-                };
-
-                await smtp.SendMailAsync(mail);
-
-                return Ok(new { message = "Message sent successfully" });
+                return StatusCode((int)response.StatusCode, "Failed to send email.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.ToString());
+                return StatusCode(500, $"Email sending failed: {ex.Message}");
             }
         }
     }
