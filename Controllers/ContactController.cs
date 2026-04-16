@@ -28,7 +28,7 @@ namespace portFolio.Controllers
 
                 var client = new SendGridClient(apiKey);
 
-                var from = new EmailAddress("noreply@sendgrid.net", "Portfolio Contact");
+                var from = new EmailAddress("ragulvincent09@gmail.com", "Portfolio Contact");
                 var to = new EmailAddress("ragulvincent09@gmail.com");
 
                 var subject = "New Portfolio Contact Message";
@@ -39,7 +39,7 @@ namespace portFolio.Controllers
                     $"Message: {contact.Message}";
 
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, null);
-                msg.SetReplyTo(new EmailAddress("ragulvincent09@gmail.com", "Ragul V"));
+
                 var response = await client.SendEmailAsync(msg);
 
                 // AUTO RESPONSE
@@ -63,7 +63,7 @@ namespace portFolio.Controllers
                         autoContent,
                         null
                     );
-                    autoMsg.SetReplyTo(new EmailAddress("ragulvincent09@gmail.com", "Ragul V"));
+
                     await client.SendEmailAsync(autoMsg);
 
                     return Ok("Message sent successfully");
