@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "R:\\Websites\\my_PortFolio\\portFolio\\portFolio\\portFolio.csproj": {}
+    "R:\\Websites\\my_PortFolio\\portFolio\\portfolio\\portFolio.csproj": {}
   },
   "projects": {
-    "R:\\Websites\\my_PortFolio\\portFolio\\portFolio\\portFolio.csproj": {
+    "R:\\Websites\\my_PortFolio\\portFolio\\portfolio\\portFolio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "R:\\Websites\\my_PortFolio\\portFolio\\portFolio\\portFolio.csproj",
+        "projectUniqueName": "R:\\Websites\\my_PortFolio\\portFolio\\portfolio\\portFolio.csproj",
         "projectName": "portFolio",
-        "projectPath": "R:\\Websites\\my_PortFolio\\portFolio\\portFolio\\portFolio.csproj",
+        "projectPath": "R:\\Websites\\my_PortFolio\\portFolio\\portfolio\\portFolio.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "R:\\Websites\\my_PortFolio\\portFolio\\portFolio\\obj\\",
+        "outputPath": "R:\\Websites\\my_PortFolio\\portFolio\\portfolio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

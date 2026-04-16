@@ -14,7 +14,7 @@ namespace portFolio.Controllers
     public class ContactController : ControllerBase
     {
 
-[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] contact contact)
         {
             try
@@ -42,9 +42,32 @@ namespace portFolio.Controllers
 
                 var response = await client.SendEmailAsync(msg);
 
+                // ==============================
+                // ✅ AUTO RESPONSE ADDED BELOW
+                // ==============================
+
                 if (response.StatusCode == System.Net.HttpStatusCode.Accepted ||
                     response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
+                    // Auto reply to user
+                    var autoSubject = "Thank you for contacting me";
+
+                    var autoContent =
+                        $"Hello {contact.Name},\n\n" +
+                        $"Thank you for reaching out through my portfolio.\n\n" +
+                        $"I have received your message and will get back to you as soon as possible.\n\n" +
+                        $"Best regards,\nRagul V\nFull Stack Developer";
+
+                    var autoMsg = MailHelper.CreateSingleEmail(
+                        from,
+                        new EmailAddress(contact.Email, contact.Name),
+                        autoSubject,
+                        autoContent,
+                        null
+                    );
+
+                    await client.SendEmailAsync(autoMsg);
+
                     return Ok("Message sent successfully");
                 }
 
